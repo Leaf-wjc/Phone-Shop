@@ -1,0 +1,219 @@
+/*动画*/
+/*screen1动画样式*/
+.screen1_heading,
+.screen1_phone,
+.screen1_shadow {
+	transition: all 1s;
+}
+
+.screen1_heading_animate_init,
+.screen1_shadow_animate_init {
+	opacity: 0;
+	transform: translate(0, 100%);
+}
+
+.screen1_heading_animate_down,
+.screen1_phone_animate_down,
+.screen1_shadow_animate_down {
+	opacity: 1;
+	transform: translate(0, 0);
+}
+
+.screen1_phone_animate_init {
+	opacity: 0;
+	transform: translate(0, -100%);
+}
+/*screen2动画样式*/
+.screen2_heading,
+.screen2_info,
+.screen2_phone {
+	transition: all 1s;
+}
+
+.screen2_point {
+	transition: all 0.5s ease-in-out 1s;
+}
+
+.screen2_heading_animate_init {
+	opacity: 0;
+	transform: translate(0, -100%);
+}
+
+.screen2_info_animate_init,
+.screen2_phone_animate_init {
+	opacity: 0;
+	transform: translate(0, 100%);
+}
+
+.screen2_point_i_1_animate_init {
+	opacity: 0;
+	transform: translate(-100%, 0)
+}
+
+.screen2_point_i_2_animate_init,
+.screen2_point_i_3_animate_init {
+	opacity: 0;
+	transform: translate(100%, 0)
+}
+
+.screen2_heading_animate_down,
+.screen2_info_animate_down,
+.screen2_phone_animate_down {
+	opacity: 1;
+	transform: translate(0, 0);
+}
+
+/*screen3动画样式*/
+.screen3_heading,
+.screen3_info,
+.screen3_phone,
+.screen3_features {
+	transition: all 1s;
+}
+
+.screen3_heading_animate_init {
+	opacity: 0;
+	transform: translate(0, -100%);
+}
+
+.screen3_info_animate_init,
+.screen3_phone_animate_init {
+	opacity: 0;
+	transform: translate(0, 100%);
+}
+
+.screen3_features_animate_init {
+	opacity: 0;
+	transform: scale(0.5);
+}
+
+.screen3_features_animate_down {
+	opacity: 1;
+	transform: scale(1);
+}
+
+.screen3_heading_animate_down,
+.screen3_info_animate_down,
+.screen3_phone_animate_down {
+	opacity: 1;
+	transform: translate(0, 0);
+}
+
+
+/* features动画 */
+.screen3_features_item {
+	cursor: pointer;
+	transition: all 0.5s;
+}
+
+.screen3_features_item:hover {
+	transform: scale(1.1);
+}
+
+/*screen4动画样式*/
+.screen4_heading,
+.screen4_info {
+	transition: all 1s;
+}
+
+.screen4_heading_animate_init {
+	opacity: 0;
+	transform: translate(0, -100%);
+}
+
+.screen4_info_animate_init {
+	opacity: 0;
+	transform: translate(0, 100%);
+}
+
+.screen4_heading_animate_down,
+.screen4_info_animate_down {
+	opacity: 1;
+	transform: translate(0, 0);
+}
+
+.screen4_type_item_i_1 {
+	transition: all 1s;
+}
+.screen4_type_item_i_2 {
+	transition: all 1s 0.4s;
+}
+.screen4_type_item_i_3 {
+	transition: all 1s 0.8s;
+}
+.screen4_type_item_i_4 {
+	transition: all 1s 1.2s;
+}
+
+.screen4_type_item_i_1_animate_init,
+.screen4_type_item_i_2_animate_init,
+.screen4_type_item_i_3_animate_init,
+.screen4_type_item_i_4_animate_init {
+	opacity: 0;
+}
+
+.screen4_type_item_i_1_animate_down,
+.screen4_type_item_i_2_animate_down,
+.screen4_type_item_i_3_animate_down,
+.screen4_type_item_i_4_animate_down {
+	opacity: 1;
+}
+
+/*screen5动画*/
+.screen5_heading,
+.screen5_info,
+.screen5_bg {
+	transition: all 1s;
+}
+
+.screen5_bg_animate_init,
+.screen5_info_animate_init {
+	opacity: 0;
+	transform: translate(0, 100%);
+}
+
+.screen5_heading_animate_init {
+	opacity: 0;
+	transform: translate(0, -100%);
+}
+
+
+.screen5_heading_animate_down,
+.screen5_info_animate_down,
+.screen5_bg_animate_down {
+	opacity: 1;
+	transform: translate(0, 0);
+}
+
+/*帧动画*/
+@-webkit-keyframes bounce {
+	0%,100% {
+		transform: scale(0);
+	}
+	50% {
+		transform: scale(1);
+	}
+}
+.screen2_point::before,
+.screen2_point::after {
+	content: ' ';
+	display: block;
+	width: 20px;
+	height: 20px;
+	background-color: rgba(255, 0, 0, 0.4);
+	position: absolute;
+	left: 1px;
+	top: 1px;
+	-webkit-animation: bounce 2s infinite;
+	border-radius: 50%;
+}
+
+.screen2_point::before {
+	-webkit-animation: bounce 2s infinite 1s;
+}
+
+.screen2_point_i_1::before,
+.screen2_point_i_1::after{
+	left: 187px;
+}
+
