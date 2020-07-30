@@ -1,5 +1,4 @@
 /*获取元素*/
-alert("1");
 var getEle = function (selector) {
 	/* body... */
 	return document.querySelector(selector);
@@ -36,7 +35,7 @@ var addCls = function (elements,cls) {
 	}
 }
 
-var removeCls = function (elements,cls) {
+var delCls = function (elements,cls) {
 	/* body... */
 	var baseCls = getCls(elements);
 	if (baseCls.indexOf(cls) !== -1) {
@@ -55,21 +54,140 @@ var screenAnimateElements = {
 
 var setScreenAnimateInit = function (screenCls) {
 	/* body... */
-	var screen = docuemnt.querySelector(screenCls),
+	var screen = document.querySelector(screenCls),
 		animateElements = screenAnimateElements[screenCls];
-			for (var i = 0; i < animateElements.length; i++) {
-				debugger;
-				var elements = document.querySelector(animateElements[i]),
-					baseCls = elements.getAttribute('class');
-				elements.setAttribute('class', baseCls + ' ' + animateElements[i].substr(1) + '_animate_init');
-			}
+	for (var i = 0; i < animateElements.length; i++) {
+		var elements = document.querySelector(animateElements[i]),
+			baseCls = elements.getAttribute('class');
+		elements.setAttribute('class', baseCls + ' ' + animateElements[i].substr(1) + '_animate_init');
+	}
 }
 
 
+var playScreenAnimateDown = function (screenCls) {
+	/* body... */
+		var screen = document.querySelector(screenCls),
+			animateElements = screenAnimateElements[screenCls];
+		for (var i = 0; i < animateElements.length; i++) {
+			var elements = document.querySelector(animateElements[i]),
+				baseCls = elements.getAttribute('class');
+			elements.setAttribute('class', baseCls.replace('_animate_init', '_animate_down'));
+		}
+
+}
 window.onload = function () {
 	/* body... */
-	debugger;
 	for(k in screenAnimateElements){
+		if (k === '.screen1') {
+			continue;
+		}
 		setScreenAnimateInit(k);
 	}
 }
+
+window.onscroll = function () {
+	/* body... */
+	var top = document.documentElement.scrollTop || document.body.scrollTop;
+
+	if (top > 80) {
+		addCls(getEle('.header'),'header_status_black');
+		addCls(getEle('.outline'),'outline_status_in');
+	}else {
+		delCls(getEle('.header'),'header_status_black');
+		delCls(getEle('.outline'),'outline_status_in');
+		switchNavitemsActive(0);
+	}
+	if (top > 1) {
+		playScreenAnimateDown('.screen1');
+		switchNavitemsActive(0);
+	}
+	if (top > (800*1-100)) {
+		playScreenAnimateDown('.screen2');
+		switchNavitemsActive(1);
+	}
+	if (top > (800*2-100)) {
+		playScreenAnimateDown('.screen3');
+		switchNavitemsActive(2);
+	}
+	if (top >(800*3-100)) {
+		playScreenAnimateDown('.screen4');
+		switchNavitemsActive(3);
+	}
+	if (top >(800*4-100)) {
+		playScreenAnimateDown('.screen5');
+		switchNavitemsActive(4);
+	}
+}
+
+
+//双向定位
+var navItems = getAllEle('.header_nav-item'),
+	outLineItems = getAllEle('.outline_item');
+
+var switchNavitemsActive = function (idx) {
+	/* body... */
+	for (var i = 0; i < navItems.length; i++) {
+		delCls(navItems[i],'header_nav-item_active');
+	}
+	addCls(navItems[idx],'header_nav-item_active');
+
+	for (var i = 0; i < outLineItems.length; i++) {
+		delCls(outLineItems[i],'outline_item_status_active');
+	}
+	addCls(outLineItems[idx],'outline_item_status_active');
+}
+
+
+var setJump = function (i,lib) {
+	/* body... */
+	var item = lib[i];
+	item.onclick = function () {
+		/* body... */
+		document.documentElement.scrollTop = (800*i+1);
+		switchNavitemsActive(i);
+	}
+}
+
+for (var i = 0; i < navItems.length-1; i++) {
+	setJump(i,navItems)
+}
+
+for (var j = 0; j < outLineItems.length-1; j++) {
+	setJump(j,outLineItems)
+}
+
+//滑动门特效
+var navTip = getEle('.header_nav-tip'),
+	activeIdx = 0;
+var setTip = function (idx,lib) {
+	/* body... */
+	lib[idx].onmouseover = function () {
+		/* body... */
+		navTip.style.left = (idx*70) + 'px';
+	}
+	lib[idx].onmouseout = function () {
+		/* body... */
+		// for (var i = 0; i < lib.length; i++) {
+		// 	if (getCls(lib[i]).indexOf('.header_nav-item_active')) {
+		// 		activeIdx = i;
+		// 	}
+		// }
+		// navTip.style.left = (activeIdx*70) + 'px';
+		for (var i = 0; i < lib.length; i++) {
+			if (getCls(lib[i]).indexOf('.header_nav-item_active') > -1) {
+				activeIdx = i;
+				break;
+			}
+		}
+		navTip.style.left = (activeIdx*70) + 'px';
+	}
+}
+
+for (var i = 0; i < navItems.length-1; i++) {
+	setTip(i,navItems);
+}
+
+setTimeout(function () {
+	/* body... */
+	playScreenAnimateDown('.screen1');
+}, 200)

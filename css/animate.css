@@ -217,3 +217,34 @@
 	left: 187px;
 }
 
+.header {
+	transition: all 2s;
+}
+
+.header_status_black {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	background-color: rgba(0, 0, 0, 0.3);
+	z-index: 3;
+}
+
+.header_status_black .header_logo,
+.header_status_black .header_nav-item {
+	color: #fff;
+}
+.header_status_black .header_nav-item_active,
+.header_nav-item:hover {
+	color: red;
+}
+.outline {
+	opacity: 0;
+	transition: all 1s;
+	transform: translate(100%, 0);
+}
+
+.outline_status_in {
+	opacity: 1;
+	transform: translate(0, 0);
+}
